@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using P015Etut.Data;
 
@@ -18,7 +19,20 @@ namespace P015Etut
                 options.UseSqlServer(builder.Configuration.GetConnectionString("P015E010DB"));
             });
 
+
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login";
+                    options.LogoutPath = "/Logout";
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                    options.AccessDeniedPath = "/AccessDenied";
+                });
+
+
             var app = builder.Build();
+
 
 
             using (var scope = app.Services.CreateScope())
@@ -46,6 +60,7 @@ namespace P015Etut
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

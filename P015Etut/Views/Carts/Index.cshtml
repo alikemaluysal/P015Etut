@@ -1,0 +1,10 @@
+﻿@model List<CartItem>
+
+
+
+@foreach (var item in Model)
+{
+    <p>@item.Product.Name - @item.Product.Price - @item.Quantity</p>
+}
+
+<p>@ViewBag.TotalPrice</p>

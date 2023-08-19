@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using Microsoft.EntityFrameworkCore;
-using P015Etut.Models;
+using P015Etut.Entities;
 using System.Xml.Linq;
 
 namespace P015Etut.Data
@@ -9,6 +9,9 @@ namespace P015Etut.Data
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
@@ -41,6 +44,12 @@ namespace P015Etut.Data
             var productSeeds = productFaker.Generate(200);
 
             modelBuilder.Entity<Product>().HasData(productSeeds);
+
+            modelBuilder.Entity<User>().HasData(
+                new User() { Id = 1, Name = "Ali Kemal" ,Surname="Uysal", Email="alikemal.uysal@siliconmade.com", Password = "1234"},
+                new User() { Id = 2, Name = "Furkan" ,Surname="Üçgül", Email="furkan@siliconmade.com", Password = "4545"}
+
+                );
 
 
             //modelBuilder.Entity<Category>().HasData(

@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P015Etut.Data;
-using P015Etut.Models;
+using P015Etut.Entities;
+using P015Etut.Paging;
+using System.Security.Claims;
 using System.Xml.Linq;
 
 namespace P015Etut.Controllers
 {
+    
     public class ProductsController : Controller
     {
         //Database database = new Database();
@@ -76,5 +79,32 @@ namespace P015Etut.Controllers
             var product = database.Products.Include(p => p.Category).FirstOrDefault(p => p.Id == id);
             return View(product);
         }
+
+
+        public IActionResult AddToCart(int id, int quantity)
+        {
+
+            var user = database.Users.FirstOrDefault(u => u.Id == int.Parse(User.FindFirstValue(ClaimTypes.PrimarySid)));
+
+            var cart = database.Carts.Where(c => c.UserId == user.Id).Include(c => c.CartItems).FirstOrDefault();
+
+
+            if (cart == null || cart.CartItems.Count == 2)
+            {
+                cart = new Cart() { UserId = user.Id, CreatedAt = DateTime.Now };
+                database.Carts.Add(cart);
+                database.SaveChanges();
+            }
+
+            var product = database.Products.Include(p => p.Category).FirstOrDefault(p => p.Id == id);
+            var cartItem = new CartItem() { ProductId = product.Id, Quantity = quantity, CartId = cart.Id };
+
+            database.CartItems.Add(cartItem);
+            database.SaveChanges();
+
+            return RedirectToAction(nameof(Details), new {id = product.Id});
+        }
+
+
     }
 }

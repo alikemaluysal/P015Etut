@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace P015Etut.Models
+namespace P015Etut.Paging
 {
     public class PaginatedList<T> : List<T>
     {

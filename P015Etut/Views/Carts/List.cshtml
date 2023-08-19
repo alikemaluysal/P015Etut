@@ -1,0 +1,6 @@
+﻿@model List<Cart>
+
+
+@foreach(var items in Model){
+    <p>Sepet Id: @items.Id - Ürün Adedi: @items.CartItems.Count</p>
+}

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using P015Etut.Data;
-using P015Etut.Models;
+using P015Etut.Entities;
 
 namespace P015Etut.Areas.Admin.Controllers
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace P015Etut.Models
+namespace P015Etut.Entities
 {
     public class Product
     {

@@ -1,4 +1,4 @@
-﻿using P015Etut.Models;
+﻿using P015Etut.Entities;
 
 namespace P015Etut.Data
 {

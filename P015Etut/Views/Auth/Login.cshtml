@@ -1,0 +1,25 @@
+﻿@model LoginViewModel
+<h2>Login Formu</h2>
+
+<div class=" container-fluid d-flex">
+    <form asp-controller="Auth" asp-action="Login" method="post">
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email address</label>
+            <input asp-for="Email" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Password</label>
+            <input asp-for="Password" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label asp-for="RememberMe" class="form-label">Remember Me</label>
+            <input asp-for="RememberMe" type="checkbox" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a asp-action="Register" asp-controller="Auth" class="btn btn-outline-primary"> Register</a>
+    </form>
+</div>
+
+
+<partial name="_ValidationScriptsPartial" />
