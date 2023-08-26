@@ -1,4 +1,4 @@
-﻿using P015Etut.Entities;
+﻿using App.Data.Entities;
 
 namespace P015Etut.Data
 {

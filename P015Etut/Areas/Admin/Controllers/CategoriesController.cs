@@ -1,22 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using P015Etut.Data;
-using P015Etut.Entities;
+using App.Data.Context;
+using App.Data.Entities;
+using App.Data.Concrete;
+using App.Data.Abstract;
 
 namespace P015Etut.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CategoriesController : Controller
     {
-        DatabaseContext _context;
+        IRepository<Category> _repository;
 
-        public CategoriesController(DatabaseContext context)
+        public CategoriesController(IRepository<Category> repository)
         {
-            _context = context;
+            _repository = repository;
         }
+
 
         public IActionResult Index()
         {
-            var categories = _context.Categories.ToList();
+            var categories = _repository.Get();
             return View(categories);
         }
 
@@ -30,22 +33,21 @@ namespace P015Etut.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(category);
-                _context.SaveChanges();
+                _repository.Create(category);
             }
 
             return RedirectToAction(nameof(Index));
 
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _repository.Get() == null)
             {
                 return NotFound();
             }
 
-            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            var category = _repository.GetById(id);
 
             if (category == null)
             {
@@ -69,8 +71,7 @@ namespace P015Etut.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Categories.Update(category);
-                    _context.SaveChanges();
+                    _repository.Update(category.Id, category);
                 }
                 catch (Exception)
                 {
@@ -82,14 +83,14 @@ namespace P015Etut.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _repository.Get() == null)
             {
                 return NotFound();
             }
 
-            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            var category = _repository.GetById(id);
 
             if (category == null)
             {
@@ -102,7 +103,7 @@ namespace P015Etut.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(Category category)
         {
-            var categoryToDelete = _context.Categories.FirstOrDefault(c => c.Id == category.Id);
+            var categoryToDelete = _repository.GetById(category.Id);
 
 
             if (categoryToDelete == null)
@@ -111,8 +112,7 @@ namespace P015Etut.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            _context.Categories.Remove(categoryToDelete);
-            _context.SaveChanges();
+            _repository.Delete(categoryToDelete.Id);
 
             return RedirectToAction(nameof(Index));
         }

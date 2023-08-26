@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using P015Etut.Data;
-using P015Etut.Entities;
+using App.Data.Context;
+using App.Data.Entities;
 using P015Etut.Paging;
 using System.Security.Claims;
 using System.Xml.Linq;

@@ -1,4 +1,4 @@
-﻿namespace P015Etut.Entities;
+﻿namespace App.Data.Entities;
 
 public class User
 {

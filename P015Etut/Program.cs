@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using P015Etut.Data;
+using App.Data.Context;
+using App.Data.Abstract;
+using App.Data.Entities;
+using App.Data.Concrete;
 
 namespace P015Etut
 {
@@ -8,6 +11,8 @@ namespace P015Etut
     {
         public static void Main(string[] args)
         {
+
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -18,6 +23,11 @@ namespace P015Etut
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("P015E010DB"));
             });
+
+
+
+            builder.Services.AddScoped<IRepository<Category>, DataRepository<Category>>();
+            builder.Services.AddScoped<IRepository<Product>, DataRepository<Product>>();
 
 
 

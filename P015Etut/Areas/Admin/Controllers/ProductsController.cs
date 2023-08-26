@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using P015Etut.Data;
+using App.Data.Context;
 
 namespace P015Etut.Areas.Admin.Controllers
 {

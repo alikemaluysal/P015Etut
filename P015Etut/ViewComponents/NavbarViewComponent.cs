@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using P015Etut.Data;
+using App.Data.Context;
 using P015Etut.Models;
 
 namespace P015Etut.ViewComponents

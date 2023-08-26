@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace P015Etut.Entities
+namespace App.Data.Entities
 {
     public class Category
     {

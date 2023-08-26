@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using P015Etut.Data;
+using App.Data.Context;
 using P015Etut.Models;
 using System.Security.Claims;
 

@@ -1,9 +1,9 @@
 ﻿using Bogus;
 using Microsoft.EntityFrameworkCore;
-using P015Etut.Entities;
+using App.Data.Entities;
 using System.Xml.Linq;
 
-namespace P015Etut.Data
+namespace App.Data.Context
 {
     public class DatabaseContext : DbContext
     {
